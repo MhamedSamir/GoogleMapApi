@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add Map</title>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyWWZ5A9d-snL_fW3uNUXzt6DbcnsoCYE&callback=initMap&libraries=&v=weekly"
+      defer
+    >
+      </script>
+    <style type="text/css">
+     
+      #map {
+        height: 400px;
+       
+        width: 100%;
+        
+      }
+    </style>
+    </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+   
+    <div id="map"></div>
+      <div id="demo"></div>
+      <button id="btnLoc">GEt MyLocation</button>
+      <script>
+  var position ;
+      function initMap(x=26.8206,y=30.8025,z=4) {
+      
+         position = { lat:x , lng: y };
+      
+        var map = new google.maps.Map(document.getElementById("map"), {
+          zoom: z,
+          center: position,
+        });
+       
+        var marker = new google.maps.Marker({
+          position: position,
+          map: map,
+        });
+      }
+        
+        
+   var x = document.getElementById("demo");
+document.getElementById("btnLoc").addEventListener("click",function geolocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+});
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude +
+  "<br>Longitude: " + position.coords.longitude;
+   initMap(position.coords.latitude,position.coords.longitude,10);
+}
+    </script>
+  
+  </body>
+</html>
